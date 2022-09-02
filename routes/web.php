@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return Post::withSum(
         'comments as rank'
-    , 'CASE WHEN stars > 3 THEN 5 ELSE 0 END')->get();
+    , DB::raw('CASE WHEN stars > 3 THEN 5 ELSE 0 END'))->get();
 });
